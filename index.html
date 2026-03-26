@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Morrigan - Rock</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables de color */
+        :root {
+            --bg-black: #000000;
+            --main-red: #cc0000;
+            --cream-beige: #e5d8c1;
+            --subtle-red: #330000;
+            --dark-gray: #1a1a1a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-black);
+            color: var(--cream-beige);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--main-red);
+            margin-bottom: 5px;
+        }
+
+        .logo-container {
+            max-width: 450px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Botones y Enlaces */
+        .music-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .music-btn {
+            background-color: var(--subtle-red);
+            color: var(--main-red);
+            border: 2px solid var(--main-red);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-btn:hover {
+            background-color: var(--main-red);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .social-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: var(--cream-beige);
+            font-size: 2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover { color: var(--main-red); }
+
+
+/* Bio y Conciertos */ 
+        .bio { background-color: #0a0a0a; padding: 20px 20px; }
+        .bio2 { max-width: 800px; margin: 60px auto; padding: 0 20px; line-height: 1.8; color: #ccc; }
+        .conciertos { max-width: 900px; margin: 20px auto; padding: 20px; }
+        .conciertos h2 { border-bottom: 2px solid var(--main-red); display: inline-block; padding-bottom: 10px; text-transform: uppercase; }
+        
+        .tabla-conciertos { width: 100%; border-collapse: collapse; text-align: left; margin-top: 20px; }
+        .tabla-conciertos tr { border-bottom: 1px solid #333; }
+        .tabla-conciertos td { padding: 20px 10px; }
+        .fecha { font-weight: bold; color: var(--main-red); width: 20%; }
+        .btn-ticket { background: var(--main-red); color: white; padding: 8px 15px; text-decoration: none; border-radius: 3px; font-size: 0.8rem; }
+
+
+/* DISCOGRAFÍA */
+.discografia { background-color: #0a0a0a; padding: 20px 20px; }
+
+.album-card { 
+    max-width: 850px; 
+    margin: 0 auto; }
+
+.album-content { 
+    display: flex; 
+    gap: 20px; 
+    align-items: flex-start; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    margin-top: 20px; }
+
+.album-cover { flex: 0 0 250px; border: 2px solid var(--main-red); }
+.album-cover img { width: 100%; display: block; }
+
+.player-container { 
+    flex: 1; 
+    min-width: 300px; 
+    background: var(--subtle-red); 
+    padding: 15px; 
+    border-radius: 8px; 
+    border-left: 4px solid var(--main-red); 
+    text-align: left; }
+
+/* --- AQUÍ ESTÁ EL CAMBIO CLAVE PARA QUE SALGAN EN LÍNEA --- */
+.track { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 5px; /* Menos espacio entre canciones para que quepan 7 */ }
+
+.track small { 
+    color: var(--main-red); 
+    font-family: monospace; 
+    flex: 0 0 175px; /* Ancho fijo para el texto para que todos los audios se alineen */
+    font-size: 0.7rem; 
+    line-height: 1; }
+
+audio { 
+    flex: 1; 
+    height: 28px; /* Reproductor más pequeño */
+    filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+
+
+
+/* COMPONENTES (CORREGIDO) */
+        .integrantes { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
+        .grid-fotos { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+        }
+        .foto-card { 
+            background: var(--dark-gray); 
+            padding: 10px; 
+            border: 1px solid #333; 
+            transition: 0.3s; 
+            cursor: pointer; 
+        }
+        .foto-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--main-red); 
+        }
+        .foto-card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            filter: grayscale(100%); 
+            transition: 0.4s; 
+        }
+        .foto-card:hover img { 
+            filter: grayscale(0%); 
+        }
+
+        /* LIGHTBOX (IMAGEN GRANDE) */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        #img-expandida {
+            max-width: 90%;
+            max-height: 85%;
+            border: 3px solid var(--main-red);
+            box-shadow: 0 0 30px rgba(204, 0, 0, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .grid-fotos { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="logo-container">
+            <img src="fotos/logo.jpeg" alt="Las Morrigan Logo">
+        </div>
+        <h1>Guerra a la guerra</h1>
+        <p>El sonido de lo que no existe</p>
+        <div class="music-links">
+            <a href="#" target="_blank" class="music-btn"><i class="fab fa-spotify"></i> Spotify</a>
+            <a href="#" target="_blank" class="music-btn"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/1A5ZrGNDsG/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/las_morrigan/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://whatsapp.com/channel/0029Vb8kwfP5q08b2Mip8o47" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <div class="bio">
+        <h2>La Leyenda Continúa</h2>
+        <p class="bio2">Forjados en la oscuridad del ostracismo musical, Las Morrigan traen un sonido visceral. Donde el punk rock se entrelaza con el descubrimiento de las mentiras que nos venden como verdad. El graznido de los cuervos anuncia su llegada. Nuestra música es una batalla. Nuestras letras, una herejía para el sistema social establecido.
+</p><p class="bio2">
+No somos solo una banda. Somos la venganza de Morrigan. Somos legión.</p>
+    </div>
+
+    <section class="conciertos">
+        <h2>Próximos Rituales</h2>
+        <table class="tabla-conciertos">
+            <tr>
+                <td class="fecha">25 ABR</td>
+                <td class="ciudad">BERRIOPLANO</td>
+                <td class="recinto">Rockópolis</td>
+                <td><a href="#" class="btn-ticket">Entrada libre</a></td>
+            </tr>
+            <tr>
+                <td class="fecha">18 AGO</td>
+                <td class="ciudad">TAFALLA</td>
+                <td class="recinto">Txoznas</td>
+                <td><a href="#" class="btn-ticket">Entrada libre</a></td>
+            </tr>
+        </table>
+    </section>
+
+<section class="discografia">
+    <h2>Discografía</h2>
+    <div class="album-card">
+        <h3>Las Morrigan</h3>
+        <div class="album-content">
+            <div class="album-cover">
+                <img src="fotos/portada_album1.jpeg" alt="Las Morrigan Album">
+            </div>
+            <div class="player-container">
+                <p><i class="fas fa-play"></i> Escucha el álbum</p>
+                
+                <div class="track">
+                    <small>1. Sonría por favor</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Sonría por favor.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>2.  Fascista de salón</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Fascista de salón.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>3. ¿Qué está pasando aquí?</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Qué está pasando aquí.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>4.  El ser</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - El ser.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>5. Dios salve al rey</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Dios salve al rey.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>6.  Jubilados al peso</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Jubilados al peso.mp3" type="audio/mpeg"></audio>
+                </div>
+                <div class="track">
+                    <small>7. Felicidad sintética</small>
+                    <audio controls class="album-track">
+                    <source src="mp3/Las Morrigan - Felicidad sintética.mp3" type="audio/mpeg"></audio>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <section class="integrantes">
+        <h2>Fotos</h2>
+        <div class="grid-fotos">
+            <div class="foto-card" onclick="expandirImagen(this)">
+                <img src="fotos/grupo1.jpeg" alt="Componente 1">
+                <p>Las Morrigan</p>
+            </div>
+            <div class="foto-card" onclick="expandirImagen(this)">
+                <img src="fotos/grupo2.jpeg" alt="Componente 2">
+                <p>Las Morrigan</p>
+            </div>
+            <div class="foto-card" onclick="expandirImagen(this)">
+                <img src="fotos/grupo3.jpeg" alt="Componente 3">
+                <p>Las Morrigan</p>
+            </div>
+            <div class="foto-card" onclick="expandirImagen(this)">
+                <img src="fotos/grupo4.jpeg" alt="Componente 4">
+                <p>Las Morrigan</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="img-expandida" src="" alt="Imagen grande">
+        <p style="position: absolute; bottom: 20px; color: white;">Haz clic para cerrar</p>
+    </div>
+
+    <footer style="padding: 40px; color: #666; font-size: 0.9rem;">
+        © 2026 Las Morrigan. Diseñado para el caos.
+    </footer>
+
+    <script>
+        // Control de audios
+        const audios = document.querySelectorAll('.album-track');
+        audios.forEach(audio => {
+            audio.addEventListener('play', () => {
+                audios.forEach(other => { if (other !== audio) { other.pause(); other.currentTime = 0; } });
+            });
+        });
+
+        // Función expandir imagen
+        function expandirImagen(card) {
+            const src = card.querySelector('img').src;
+            const lightbox = document.getElementById('lightbox');
+            const imgBig = document.getElementById('img-expandida');
+            imgBig.src = src;
+            lightbox.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
